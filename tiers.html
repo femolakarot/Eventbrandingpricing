@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Whitespace Creatorverse — Event Branding Packages</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #0a0a0a;
+    --white: #f5f2ee;
+    --gold: #c9a84c;
+    --gold-light: #e8d08a;
+    --gold-dim: #7a6030;
+    --tier1: #1a1a2e;
+    --tier2: #0f1f1a;
+    --tier3: #1c1208;
+    --mono: 'DM Mono', monospace;
+    --serif: 'Cormorant Garamond', serif;
+    --sans: 'Syne', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--sans);
+    overflow-x: hidden;
+  }
+
+  /* HEADER */
+  header {
+    padding: 60px 40px 40px;
+    border-bottom: 1px solid #222;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(201,168,76,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+  header h1 {
+    font-family: var(--serif);
+    font-size: clamp(32px, 5vw, 56px);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--white);
+  }
+  header h1 em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+  .header-meta {
+    display: flex;
+    gap: 40px;
+    margin-top: 8px;
+    flex-wrap: wrap;
+  }
+  .meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .meta-item .meta-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: #555;
+    text-transform: uppercase;
+  }
+  .meta-item .meta-value {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--white);
+  }
+  .rate-note {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: #444;
+    margin-top: 12px;
+    padding: 10px 14px;
+    border: 1px solid #222;
+    display: inline-block;
+  }
+
+  /* TIERS GRID */
+  .tiers {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 0;
+  }
+
+  .tier {
+    padding: 48px 36px;
+    border-right: 1px solid #1a1a1a;
+    position: relative;
+    transition: background 0.3s;
+  }
+  .tier:last-child { border-right: none; }
+  .tier-1 { background: var(--tier1); }
+  .tier-2 { background: var(--tier2); }
+  .tier-3 { background: var(--tier3); }
+
+  .tier-badge {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .tier-badge::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #222;
+  }
+
+  .tier-name {
+    font-family: var(--serif);
+    font-size: 36px;
+    font-weight: 300;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .tier-tagline {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 15px;
+    color: #666;
+    margin-bottom: 28px;
+  }
+
+  .tier-price {
+    margin-bottom: 32px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid #222;
+  }
+  .price-ngn {
+    font-family: var(--mono);
+    font-size: clamp(22px, 3vw, 30px);
+    color: var(--gold-light);
+    letter-spacing: -0.02em;
+  }
+  .price-usd {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: #555;
+    margin-top: 4px;
+  }
+  .price-market {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: #3a3a3a;
+    margin-top: 2px;
+    text-decoration: line-through;
+  }
+  .savings-tag {
+    display: inline-block;
+    margin-top: 8px;
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid var(--gold-dim);
+    padding: 3px 8px;
+  }
+
+  /* SECTIONS */
+  .section-title {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin: 24px 0 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #1e1e1e;
+  }
+
+  .deliverable-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+  .deliverable-list li {
+    font-size: 13px;
+    color: #ccc;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    line-height: 1.4;
+  }
+  .deliverable-list li::before {
+    content: '—';
+    color: var(--gold-dim);
+    font-family: var(--mono);
+    font-size: 11px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .deliverable-list li.not-included {
+    color: #333;
+    text-decoration: line-through;
+  }
+  .deliverable-list li.not-included::before {
+    content: '×';
+    color: #2a2a2a;
+  }
+  .deliverable-list li strong {
+    color: var(--white);
+    font-weight: 600;
+  }
+  .qty-tag {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--gold-dim);
+    background: rgba(201,168,76,0.08);
+    padding: 1px 5px;
+    border-radius: 2px;
+    white-space: nowrap;
+  }
+
+  /* HIGHLIGHT TIER */
+  .tier-3 .tier-name { color: var(--gold-light); }
+  .tier-3 .tier-badge { color: var(--gold); }
+  .recommended-flag {
+    position: absolute;
+    top: 0; right: 0;
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    background: var(--gold);
+    color: var(--black);
+    padding: 6px 14px;
+  }
+
+  /* FOOTER NOTE */
+  .footer-note {
+    padding: 40px;
+    border-top: 1px solid #1a1a1a;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 32px;
+  }
+  .note-block .note-title {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .note-block p {
+    font-size: 12px;
+    color: #555;
+    line-height: 1.7;
+    font-family: var(--mono);
+  }
+
+  /* PRINT STYLES */
+  @media print {
+    body { background: white; color: black; }
+    .tier { background: #f9f9f9 !important; border: 1px solid #ddd; }
+    .price-ngn { color: #8a6a00; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="label">Whitespace Creatorverse · Event Branding Proposal</div>
+  <h1>Power of Inclusion 7.0<br><em>Service Packages & Pricing</em></h1>
+  <div class="header-meta">
+    <div class="meta-item">
+      <span class="meta-label">Client</span>
+      <span class="meta-value">Lady ABHA / Power of Inclusion</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Event Date</span>
+      <span class="meta-value">December 11–12, 2026</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Edition</span>
+      <span class="meta-value">7th Year · Rebranded</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Scale</span>
+      <span class="meta-value">20 Speakers · 40 Award Recipients</span>
+    </div>
+  </div>
+  <div class="rate-note">All prices in Nigerian Naira (NGN). Reference rate: $1 = ₦1,370 · Prices are 25–35% below international USD market equivalents.</div>
+</header>
+
+<div class="tiers">
+
+  <!-- TIER 1 -->
+  <div class="tier tier-1">
+    <div class="tier-badge">Tier 01 · Essentials</div>
+    <div class="tier-name">The Foundation</div>
+    <div class="tier-tagline">Clean, professional launch materials</div>
+
+    <div class="tier-price">
+      <div class="price-ngn">₦2,450,000</div>
+      <div class="price-usd">≈ $1,788 USD</div>
+      <div class="price-market">International market rate: $2,500–$3,500</div>
+      <div class="savings-tag">Save up to 49% vs. intl. market</div>
+    </div>
+
+    <div class="section-title">Print & Digital Flyers</div>
+    <ul class="deliverable-list">
+      <li><strong>Event invitation flyer</strong> — print + digital versions</li>
+      <li><strong>Save-the-date graphic</strong></li>
+      <li><strong>Speaker announcement graphics</strong> <span class="qty-tag">×10 speakers</span></li>
+      <li><strong>Award recipient graphics</strong> <span class="qty-tag">×20 recipients</span></li>
+      <li><strong>WhatsApp/broadcast flyer</strong> — optimised format</li>
+    </ul>
+
+    <div class="section-title">Social Media</div>
+    <ul class="deliverable-list">
+      <li><strong>Social media post templates</strong> <span class="qty-tag">3 layouts</span></li>
+      <li><strong>Digital countdown graphics</strong> — 7-day, 3-day, 1-day</li>
+      <li><strong>Email newsletter header design</strong></li>
+    </ul>
+
+    <div class="section-title">Not Included</div>
+    <ul class="deliverable-list">
+      <li class="not-included">Motion / animated graphics</li>
+      <li class="not-included">3D visualisation</li>
+      <li class="not-included">Event brand identity / theming</li>
+      <li class="not-included">Print/physical event materials</li>
+      <li class="not-included">Livestream overlays</li>
+      <li class="not-included">Post-event graphics</li>
+      <li class="not-included">Award certificate design</li>
+    </ul>
+  </div>
+
+  <!-- TIER 2 -->
+  <div class="tier tier-2">
+    <div class="tier-badge">Tier 02 · Full Rollout</div>
+    <div class="tier-name">The Campaign</div>
+    <div class="tier-tagline">End-to-end campaign with motion & event-day materials</div>
+
+    <div class="tier-price">
+      <div class="price-ngn">₦6,200,000</div>
+      <div class="price-usd">≈ $4,526 USD</div>
+      <div class="price-market">International market rate: $6,500–$9,000</div>
+      <div class="savings-tag">Save up to 50% vs. intl. market</div>
+    </div>
+
+    <div class="section-title">Everything in Essentials +</div>
+    <ul class="deliverable-list">
+      <li><strong>All 20 speakers</strong> + <strong>all 40 award graphics</strong></li>
+      <li><strong>Event programme design</strong> — print-ready</li>
+      <li><strong>Award certificate design</strong></li>
+      <li><strong>Name badge / lanyard card design</strong></li>
+      <li><strong>Event website banner / hero graphic</strong></li>
+    </ul>
+
+    <div class="section-title">Social Media</div>
+    <ul class="deliverable-list">
+      <li><strong>Expanded social media post templates</strong> <span class="qty-tag">6 layouts</span></li>
+      <li><strong>Instagram / Facebook story graphics</strong></li>
+      <li><strong>LinkedIn event banner</strong></li>
+      <li><strong>Digital countdown series</strong> — 14-day, 7-day, 3-day, 1-day</li>
+      <li><strong>Email newsletter header design</strong></li>
+      <li><strong>WhatsApp broadcast flyer</strong> — optimised format</li>
+    </ul>
+
+    <div class="section-title">Motion Graphics</div>
+    <ul class="deliverable-list">
+      <li><strong>Animated speaker announcement reels</strong> <span class="qty-tag">×5</span></li>
+      <li><strong>Animated event invite / countdown reel</strong></li>
+      <li><strong>Livestream overlay / frame design</strong></li>
+      <li><strong>Lower-third graphics for broadcast</strong> <span class="qty-tag">name tags</span></li>
+    </ul>
+
+    <div class="section-title">Physical & Event-Day</div>
+    <ul class="deliverable-list">
+      <li><strong>Stage backdrop design</strong></li>
+      <li><strong>Pull-up / roll-up banner designs</strong> <span class="qty-tag">×2</span></li>
+      <li><strong>Media wall design</strong></li>
+      <li><strong>VIP/VVIP table card designs</strong></li>
+    </ul>
+
+    <div class="section-title">3D Visualisation</div>
+    <ul class="deliverable-list">
+      <li><strong>3D scene / event key visuals</strong> <span class="qty-tag">×2 renders</span></li>
+    </ul>
+
+    <div class="section-title">Not Included</div>
+    <ul class="deliverable-list">
+      <li class="not-included">Full event brand identity / visual direction</li>
+      <li class="not-included">3D trophy / award visualisation</li>
+      <li class="not-included">Speaker media kit template</li>
+      <li class="not-included">Event merchandise mockups</li>
+      <li class="not-included">Post-event recap graphics suite</li>
+      <li class="not-included">Branded virtual backgrounds</li>
+    </ul>
+  </div>
+
+  <!-- TIER 3 -->
+  <div class="tier tier-3">
+    <div class="recommended-flag">Recommended</div>
+    <div class="tier-badge">Tier 03 · Premium</div>
+    <div class="tier-name">The Full Experience</div>
+    <div class="tier-tagline">Complete visual ecosystem — from identity to post-event</div>
+
+    <div class="tier-price">
+      <div class="price-ngn">₦11,500,000</div>
+      <div class="price-usd">≈ $8,394 USD</div>
+      <div class="price-market">International market rate: $12,000–$18,000</div>
+      <div class="savings-tag">Save up to 53% vs. intl. market</div>
+    </div>
+
+    <div class="section-title">Everything in Full Rollout +</div>
+    <ul class="deliverable-list">
+      <li><strong>Event brand identity / visual theming</strong> — new name direction, colour palette, typography guide</li>
+      <li><strong>Animated logo sting</strong> — for new brand/name reveal</li>
+      <li><strong>Event intro / opening motion reel</strong></li>
+      <li><strong>Sponsor logo animation loop</strong></li>
+    </ul>
+
+    <div class="section-title">Social Media</div>
+    <ul class="deliverable-list">
+      <li><strong>Full social media template suite</strong> <span class="qty-tag">10 layouts</span></li>
+      <li><strong>Instagram / Facebook story graphics</strong></li>
+      <li><strong>LinkedIn + Twitter/X event banners</strong></li>
+      <li><strong>Animated countdown series</strong> — full multi-platform rollout</li>
+      <li><strong>Email newsletter header + footer design</strong></li>
+      <li><strong>WhatsApp broadcast flyer</strong> — optimised format</li>
+      <li><strong>Social media highlight covers</strong> — branded Instagram highlights</li>
+    </ul>
+
+    <div class="section-title">Expanded Motion</div>
+    <ul class="deliverable-list">
+      <li><strong>Animated speaker + award graphics</strong> <span class="qty-tag">×20 total</span></li>
+      <li><strong>Animated countdown series</strong> — full social rollout</li>
+    </ul>
+
+    <div class="section-title">Expanded 3D</div>
+    <ul class="deliverable-list">
+      <li><strong>3D scene / event key visuals</strong> <span class="qty-tag">×5 renders</span></li>
+      <li><strong>3D trophy / award visualisation</strong></li>
+      <li><strong>3D stage / venue concept render</strong></li>
+    </ul>
+
+    <div class="section-title">Physical & Experience</div>
+    <ul class="deliverable-list">
+      <li><strong>Directional signage designs</strong></li>
+      <li><strong>Event merchandise mockups</strong> — t-shirt, bag, lanyard</li>
+      <li><strong>Seating chart / floor plan graphic</strong></li>
+      <li><strong>Branded Zoom / virtual background</strong></li>
+      <li><strong>Speaker media kit template</strong> — for speakers to self-promote</li>
+    </ul>
+
+    <div class="section-title">Post-Event Suite</div>
+    <ul class="deliverable-list">
+      <li><strong>Post-event recap graphic set</strong></li>
+      <li><strong>Award winners announcement graphics</strong></li>
+      <li><strong>Thank-you / appreciation graphics</strong></li>
+    </ul>
+  </div>
+
+</div>
+
+<div class="footer-note">
+  <div class="note-block">
+    <div class="note-title">Payment Terms</div>
+    <p>50% deposit to commence.<br>50% balance before final file delivery.<br>Milestone payments available on Tier 3.</p>
+  </div>
+  <div class="note-block">
+    <div class="note-title">Revisions</div>
+    <p>2 rounds of revisions per deliverable included across all tiers. Additional rounds billed at ₦30,000/round.</p>
+  </div>
+  <div class="note-block">
+    <div class="note-title">Deliverable Format</div>
+    <p>All files delivered in web-ready (JPG/PNG/MP4) and print-ready (PDF/AI) formats where applicable.</p>
+  </div>
+  <div class="note-block">
+    <div class="note-title">Timeline</div>
+    <p>Phased delivery schedule provided upon project kickoff. Event is Dec 11–12, 2026 — 7+ months of runway.</p>
+  </div>
+  <div class="note-block">
+    <div class="note-title">Custom Scope</div>
+    <p>Need something between tiers? A bespoke quote can be prepared based on specific deliverables selected.</p>
+  </div>
+  <div class="note-block">
+    <div class="note-title">Studio</div>
+    <p>Whitespace Creatorverse<br>whitespacecreatorverse.com<br>Creative direction · Branding · Motion · 3D</p>
+  </div>
+</div>
+
+</body>
+</html>
